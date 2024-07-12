@@ -1,4 +1,4 @@
-from word_list import wordlist
+from wordlistbig import wordlist
 
 
 # print(wordlist)
@@ -18,23 +18,19 @@ def filter_words_including_letters(words, include_letters):
 
 #filter by letter positions
 def filter_words_by_position(words, position_dict):
-    """
-    Filters a list of words to include only those that have specific letters at specific positions.
-    
-    Args:
-        words (list of str): The list of words to filter.
-        position_dict (dict of int: str): A dictionary where keys are positions (0-indexed) and values are the required letters at those positions.
-    
-    Returns:
-        list of str: A list of words that have the specified letters at the specified positions.
-    """
     return [word for word in words if all(word[pos] == letter for pos, letter in position_dict.items())]
+
+#filter by not letter position
+def filter_words_not_in_position(words, not_position_dict):
+    return [word for word in words if all(word[pos] != letter for pos, letter in not_position_dict.items())]
 
 # Example usage
 desired_length = 5
-exclude_letters = {'c', 'r', 'a', 't', 's', 'h', 'n', 'v'}
-include_letters = {'e', 'l', 'o'}
-position_dict = {1: 'o', 3: 'e', 4: 'l'}
+exclude_letters = {}
+include_letters = {}
+position_dict = {}
+not_position_dict = {}
+
 
 
 #creating list
@@ -50,5 +46,8 @@ filtered_words_including = filter_words_including_letters(filtered_words_excludi
 # Finally filter by specific positions
 filtered_words_by_position = filter_words_by_position(filtered_words_including, position_dict)
 
+#Filter by not specific positions
+final_list = filter_words_not_in_position(filtered_words_by_position, not_position_dict)
+
 # Print the filtered list of words
-print(filtered_words_by_position)
+print(len(final_list))
