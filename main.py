@@ -1,7 +1,10 @@
-from wordlistbig import wordlist
+# from wordlistbig import wordlist
 
+import json
 
-# print(wordlist)
+# Load wordlist from JSON file
+with open('wordlistbig.json', 'r') as f:
+    wordlist = json.load(f)['wordlist']
 
 #making filter functions
 # filter length
@@ -26,10 +29,10 @@ def filter_words_not_in_position(words, not_position_dict):
 
 # Example usage
 desired_length = 5
-exclude_letters = {}
-include_letters = {}
-position_dict = {}
-not_position_dict = {}
+exclude_letters = ['r', 'a', 'n', 'e', 'm', 'p']
+include_letters = {'c', 'h', 'o'}
+position_dict = {0: 'c', 2: 'o'}
+not_position_dict = {1: 'h'}
 
 
 
@@ -50,4 +53,5 @@ filtered_words_by_position = filter_words_by_position(filtered_words_including, 
 final_list = filter_words_not_in_position(filtered_words_by_position, not_position_dict)
 
 # Print the filtered list of words
-print(len(final_list))
+print(final_list)
+
